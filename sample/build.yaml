@@ -1,0 +1,5 @@
+apiVersion: experimental.mattmoor.io/v1alpha1
+kind: Build
+metadata:
+  name: build-example
+spec:
