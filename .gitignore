@@ -1,0 +1,3 @@
+config/*
+sample/demo/bazel-*
+pkg/router/router
