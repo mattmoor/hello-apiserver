@@ -46,6 +46,50 @@ type Build struct {
 
 // BuildSpec defines the desired state of Build
 type BuildSpec struct {
+    Source SourceSpec `json:"source,omitempty"`
+
+    Steps []StepSpec `json:"steps,omitempty"`
+
+    Images []string `json:"images,omitempty"`
+}
+
+// StepSpec defines a step of the Build
+type StepSpec struct {
+    Name string `json:"name"`
+    Env []string `json:"env,omitempty"`
+    Dir string `json:"dir,omitempty"`
+    Entrypoint string `json:"entrypoint,omitempty"`
+    Args []string `json:"args,omitempty"`
+    Volumes []VolumeSpec `json:"volumes,omitempty"`
+}
+
+// VolumeSpec defines a step of the Build
+type VolumeSpec struct {
+    Name string `json:"name,omitempty"`
+    Path string `json:"path,omitempty"`
+}
+
+// SourceSpec defines the input to the Build
+type SourceSpec struct {
+    StorageSource StorageSourceSpec `json:"storage_source,omitempty"`
+    RepoSource RepoSourceSpec `json:"repo_source,omitempty"`
+}
+
+// StorageSourceSpec defines the input to the Build
+type StorageSourceSpec struct {
+    Bucket string `json:"bucket,omitempty"`
+    Object string `json:"object,omitempty"`
+    Generation int `json:"generation,omitempty"`
+}
+
+// RepoSourceSpec defines the input to the Build
+type RepoSourceSpec struct {
+    ProjectId string `json:"project_id,omitempty"`
+    RepoName string `json:"repo_name,omitempty"`
+    BranchName string `json:"branch_name,omitempty"`
+    TagName string `json:"tag_name,omitempty"`
+    CommitSHA string `json:"commit_sha,omitempty"`
+    Dir string `json:"dir,omitempty"`
 }
 
 // BuildStatus defines the observed state of Build

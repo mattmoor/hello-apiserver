@@ -1,5 +1,13 @@
-apiVersion: experimental.mattmoor.io/v1alpha1
+apiVersion: "experimental.mattmoor.io/v1alpha1"
 kind: Build
 metadata:
-  name: build-example
+  name: example-build
 spec:
+  source:
+    repoSource:
+      repoName: default
+      branchName: master
+  steps:
+  - name: gcr.io/cloud-builders/gcloud:latest
+    entrypoint: /bin/cat
+    args: [/workspace/.gitignore]
