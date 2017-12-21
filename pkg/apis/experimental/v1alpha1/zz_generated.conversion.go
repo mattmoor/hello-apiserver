@@ -119,9 +119,7 @@ func Convert_experimental_BuildList_To_v1alpha1_BuildList(in *experimental.Build
 }
 
 func autoConvert_v1alpha1_BuildSpec_To_experimental_BuildSpec(in *BuildSpec, out *experimental.BuildSpec, s conversion.Scope) error {
-	if err := Convert_v1alpha1_SourceSpec_To_experimental_SourceSpec(&in.Source, &out.Source, s); err != nil {
-		return err
-	}
+	out.Source = (*experimental.SourceSpec)(unsafe.Pointer(in.Source))
 	out.Steps = *(*[]experimental.StepSpec)(unsafe.Pointer(&in.Steps))
 	out.Images = *(*[]string)(unsafe.Pointer(&in.Images))
 	return nil
@@ -133,9 +131,7 @@ func Convert_v1alpha1_BuildSpec_To_experimental_BuildSpec(in *BuildSpec, out *ex
 }
 
 func autoConvert_experimental_BuildSpec_To_v1alpha1_BuildSpec(in *experimental.BuildSpec, out *BuildSpec, s conversion.Scope) error {
-	if err := Convert_experimental_SourceSpec_To_v1alpha1_SourceSpec(&in.Source, &out.Source, s); err != nil {
-		return err
-	}
+	out.Source = (*SourceSpec)(unsafe.Pointer(in.Source))
 	out.Steps = *(*[]StepSpec)(unsafe.Pointer(&in.Steps))
 	out.Images = *(*[]string)(unsafe.Pointer(&in.Images))
 	return nil
@@ -147,6 +143,9 @@ func Convert_experimental_BuildSpec_To_v1alpha1_BuildSpec(in *experimental.Build
 }
 
 func autoConvert_v1alpha1_BuildStatus_To_experimental_BuildStatus(in *BuildStatus, out *experimental.BuildStatus, s conversion.Scope) error {
+	out.Operation = in.Operation
+	out.Done = in.Done
+	out.ErrorMessage = in.ErrorMessage
 	return nil
 }
 
@@ -156,6 +155,9 @@ func Convert_v1alpha1_BuildStatus_To_experimental_BuildStatus(in *BuildStatus, o
 }
 
 func autoConvert_experimental_BuildStatus_To_v1alpha1_BuildStatus(in *experimental.BuildStatus, out *BuildStatus, s conversion.Scope) error {
+	out.Operation = in.Operation
+	out.Done = in.Done
+	out.ErrorMessage = in.ErrorMessage
 	return nil
 }
 
@@ -235,12 +237,8 @@ func Convert_experimental_RepoSourceSpec_To_v1alpha1_RepoSourceSpec(in *experime
 }
 
 func autoConvert_v1alpha1_SourceSpec_To_experimental_SourceSpec(in *SourceSpec, out *experimental.SourceSpec, s conversion.Scope) error {
-	if err := Convert_v1alpha1_StorageSourceSpec_To_experimental_StorageSourceSpec(&in.StorageSource, &out.StorageSource, s); err != nil {
-		return err
-	}
-	if err := Convert_v1alpha1_RepoSourceSpec_To_experimental_RepoSourceSpec(&in.RepoSource, &out.RepoSource, s); err != nil {
-		return err
-	}
+	out.StorageSource = (*experimental.StorageSourceSpec)(unsafe.Pointer(in.StorageSource))
+	out.RepoSource = (*experimental.RepoSourceSpec)(unsafe.Pointer(in.RepoSource))
 	return nil
 }
 
@@ -250,12 +248,8 @@ func Convert_v1alpha1_SourceSpec_To_experimental_SourceSpec(in *SourceSpec, out 
 }
 
 func autoConvert_experimental_SourceSpec_To_v1alpha1_SourceSpec(in *experimental.SourceSpec, out *SourceSpec, s conversion.Scope) error {
-	if err := Convert_experimental_StorageSourceSpec_To_v1alpha1_StorageSourceSpec(&in.StorageSource, &out.StorageSource, s); err != nil {
-		return err
-	}
-	if err := Convert_experimental_RepoSourceSpec_To_v1alpha1_RepoSourceSpec(&in.RepoSource, &out.RepoSource, s); err != nil {
-		return err
-	}
+	out.StorageSource = (*StorageSourceSpec)(unsafe.Pointer(in.StorageSource))
+	out.RepoSource = (*RepoSourceSpec)(unsafe.Pointer(in.RepoSource))
 	return nil
 }
 

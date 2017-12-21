@@ -174,7 +174,26 @@ func GetOpenAPIDefinitions(ref openapi.ReferenceCallback) map[string]openapi.Ope
 			Schema: spec.Schema{
 				SchemaProps: spec.SchemaProps{
 					Description: "BuildStatus defines the observed state of Build",
-					Properties:  map[string]spec.Schema{},
+					Properties: map[string]spec.Schema{
+						"id": {
+							SchemaProps: spec.SchemaProps{
+								Type:   []string{"string"},
+								Format: "",
+							},
+						},
+						"done": {
+							SchemaProps: spec.SchemaProps{
+								Type:   []string{"boolean"},
+								Format: "",
+							},
+						},
+						"errorMessage": {
+							SchemaProps: spec.SchemaProps{
+								Type:   []string{"string"},
+								Format: "",
+							},
+						},
+					},
 				},
 			},
 			Dependencies: []string{},
@@ -216,31 +235,31 @@ func GetOpenAPIDefinitions(ref openapi.ReferenceCallback) map[string]openapi.Ope
 				SchemaProps: spec.SchemaProps{
 					Description: "RepoSourceSpec defines the input to the Build",
 					Properties: map[string]spec.Schema{
-						"project_id": {
+						"projectId": {
 							SchemaProps: spec.SchemaProps{
 								Type:   []string{"string"},
 								Format: "",
 							},
 						},
-						"repo_name": {
+						"repoName": {
 							SchemaProps: spec.SchemaProps{
 								Type:   []string{"string"},
 								Format: "",
 							},
 						},
-						"branch_name": {
+						"branchName": {
 							SchemaProps: spec.SchemaProps{
 								Type:   []string{"string"},
 								Format: "",
 							},
 						},
-						"tag_name": {
+						"tagName": {
 							SchemaProps: spec.SchemaProps{
 								Type:   []string{"string"},
 								Format: "",
 							},
 						},
-						"commit_sha": {
+						"commitSha": {
 							SchemaProps: spec.SchemaProps{
 								Type:   []string{"string"},
 								Format: "",
@@ -262,12 +281,12 @@ func GetOpenAPIDefinitions(ref openapi.ReferenceCallback) map[string]openapi.Ope
 				SchemaProps: spec.SchemaProps{
 					Description: "SourceSpec defines the input to the Build",
 					Properties: map[string]spec.Schema{
-						"storage_source": {
+						"storageSource": {
 							SchemaProps: spec.SchemaProps{
 								Ref: ref("github.com/mattmoor/hello-apiserver/pkg/apis/experimental/v1alpha1.StorageSourceSpec"),
 							},
 						},
-						"repo_source": {
+						"repoSource": {
 							SchemaProps: spec.SchemaProps{
 								Ref: ref("github.com/mattmoor/hello-apiserver/pkg/apis/experimental/v1alpha1.RepoSourceSpec"),
 							},

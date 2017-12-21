@@ -76,12 +76,15 @@ type Build struct {
 }
 
 type BuildSpec struct {
-	Source SourceSpec
+	Source *SourceSpec
 	Steps  []StepSpec
 	Images []string
 }
 
 type BuildStatus struct {
+	Operation    string
+	Done         bool
+	ErrorMessage string
 }
 
 type StepSpec struct {
@@ -94,8 +97,8 @@ type StepSpec struct {
 }
 
 type SourceSpec struct {
-	StorageSource StorageSourceSpec
-	RepoSource    RepoSourceSpec
+	StorageSource *StorageSourceSpec
+	RepoSource    *RepoSourceSpec
 }
 
 type VolumeSpec struct {

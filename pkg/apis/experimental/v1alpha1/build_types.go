@@ -46,8 +46,10 @@ type Build struct {
 
 // BuildSpec defines the desired state of Build
 type BuildSpec struct {
-    Source SourceSpec `json:"source,omitempty"`
+    // Ideally this would be *cloudbuild.Source
+    Source *SourceSpec `json:"source,omitempty"`
 
+    // Ideally this would be []cloudbuild.BuildStep
     Steps []StepSpec `json:"steps,omitempty"`
 
     Images []string `json:"images,omitempty"`
@@ -71,8 +73,8 @@ type VolumeSpec struct {
 
 // SourceSpec defines the input to the Build
 type SourceSpec struct {
-    StorageSource StorageSourceSpec `json:"storage_source,omitempty"`
-    RepoSource RepoSourceSpec `json:"repo_source,omitempty"`
+    StorageSource *StorageSourceSpec `json:"storageSource,omitempty"`
+    RepoSource *RepoSourceSpec `json:"repoSource,omitempty"`
 }
 
 // StorageSourceSpec defines the input to the Build
@@ -84,16 +86,19 @@ type StorageSourceSpec struct {
 
 // RepoSourceSpec defines the input to the Build
 type RepoSourceSpec struct {
-    ProjectId string `json:"project_id,omitempty"`
-    RepoName string `json:"repo_name,omitempty"`
-    BranchName string `json:"branch_name,omitempty"`
-    TagName string `json:"tag_name,omitempty"`
-    CommitSHA string `json:"commit_sha,omitempty"`
+    ProjectId string `json:"projectId,omitempty"`
+    RepoName string `json:"repoName,omitempty"`
+    BranchName string `json:"branchName,omitempty"`
+    TagName string `json:"tagName,omitempty"`
+    CommitSHA string `json:"commitSha,omitempty"`
     Dir string `json:"dir,omitempty"`
 }
 
 // BuildStatus defines the observed state of Build
 type BuildStatus struct {
+    Operation string `json:"id,omitempty"`
+    Done bool `json:"done,omitempty"`
+    ErrorMessage string `json:"errorMessage,omitempty"`
 }
 
 // Validate checks that an instance of Build is well formed
