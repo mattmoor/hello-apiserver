@@ -136,12 +136,14 @@ func GetOpenAPIDefinitions(ref openapi.ReferenceCallback) map[string]openapi.Ope
 					Properties: map[string]spec.Schema{
 						"source": {
 							SchemaProps: spec.SchemaProps{
-								Ref: ref("github.com/mattmoor/hello-apiserver/pkg/apis/experimental/v1alpha1.SourceSpec"),
+								Description: "Ideally this would be *cloudbuild.Source",
+								Ref:         ref("github.com/mattmoor/hello-apiserver/pkg/apis/experimental/v1alpha1.SourceSpec"),
 							},
 						},
 						"steps": {
 							SchemaProps: spec.SchemaProps{
-								Type: []string{"array"},
+								Description: "Ideally this would be []cloudbuild.BuildStep",
+								Type:        []string{"array"},
 								Items: &spec.SchemaOrArray{
 									Schema: &spec.Schema{
 										SchemaProps: spec.SchemaProps{

@@ -148,6 +148,7 @@ func (c *BuildControllerImpl) waitUntilDone(u *v1alpha1.Build) error {
                         if err := c.updateStatusFromOperation(u, operation); err != nil {
                                 panic(fmt.Sprintf("Error recording final build status: %v", err))
                         }
+                        return
                 }
                 time.Sleep(1 * time.Second)
         }
